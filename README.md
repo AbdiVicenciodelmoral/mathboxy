@@ -54,17 +54,17 @@ During development, we also support debug views like showing group outlines and 
 
 ## How it’s built
 - **Language:** Python 3
-- **UI:** [PyQt6](https://pypi.org/project/PyQt6/)
+- **UI:** PyQt6
 - **Core modules:**
   - `main.py` – app entry point (creates generator and launches UI)
   - `grid_window.py` – renders the grid in a `QTableWidget`
   - `puzzle_generator.py` – generates solution grid and groupings (uses `random`)
 
 ### Current imports (not exhaustive)
-- `PyQt6.QtWidgets` (`QApplication`, `QMainWindow`, `QTableWidget`, `QTableWidgetItem`)
-- `PyQt6.QtCore` (`Qt`)
+- `PyQt6.QtWidgets`
+- `PyQt6.QtCore`
 - `random`
-- `enum` (`Enum`, `auto`)
+- `enum`
 - `__future__` annotations
 
 ---
@@ -72,17 +72,21 @@ During development, we also support debug views like showing group outlines and 
 ## Getting started
 
 ### Prerequisites
-- **Python 3.10+** recommended  
-  Check your version:
-  ```powershell
-  python --version
+- **Python 3.10+** recommended
+
+Check your version:
+```
+python --version
+```
 
 ### (Optional but recommended) Git installed
 
 Check that Git is installed by running:
-
-```powershell
+```
 git --version
+```
+
+---
 
 ## Create and use a virtual environment (recommended)
 
@@ -94,20 +98,17 @@ This prevents version conflicts and makes it easier for collaborators to match t
 ### Windows (PowerShell)
 
 From the project root folder:
-
 ```
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
 If PowerShell blocks activation, run:
-
 ```
 Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 ```
 
 Then try activating again:
-
 ```
 .\.venv\Scripts\Activate.ps1
 ```
@@ -119,13 +120,13 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
+---
 
 ## Install dependencies
 
 ### Install PyQt6
 
 With the virtual environment activated:
-
 ```
 python -m pip install --upgrade pip
 pip install PyQt6
@@ -134,13 +135,11 @@ pip install PyQt6
 ### (Recommended) Freeze dependencies
 
 After installing everything you use, generate a `requirements.txt` so collaborators can install easily:
-
 ```
 pip freeze > requirements.txt
 ```
 
 Then others can do:
-
 ```
 pip install -r requirements.txt
 ```
@@ -150,7 +149,6 @@ pip install -r requirements.txt
 ## Run the app
 
 From the project root:
-
 ```
 python main.py
 ```
@@ -178,7 +176,6 @@ This is a collaborative project.
 Suggested workflow:
 
 1. Create a new branch for each feature:
-
 ```
 git checkout -b feature/<short-name>
 ```
@@ -188,7 +185,6 @@ git checkout -b feature/<short-name>
 3. Push your branch and open a Pull Request.
 
 ### Code style
-
 - Keep functions small and well-commented
 - Prefer readable code over clever code
 - Add simple tests or debug helpers where helpful
@@ -204,17 +200,12 @@ TBD (choose a license when ready — e.g., MIT).
 ### Two quick upgrades I recommend adding right now
 
 1) **Add a `requirements.txt`** once you confirm the dependencies:
-- Activate venv
-- Install PyQt6
-- Freeze dependencies
-
 ```
 pip install PyQt6
 pip freeze > requirements.txt
 ```
 
 2) Add a `.gitignore` (Python + venv) if you haven’t already:
-
 ```
 __pycache__/
 *.pyc
@@ -224,4 +215,3 @@ venv/
 .DS_Store
 .idea/
 .vscode/
-```
