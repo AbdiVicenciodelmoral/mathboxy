@@ -1,9 +1,9 @@
-# Math Box Prototype (PyQt6)
+# MathBoxy 🧩
 
-A desktop puzzle game prototype inspired by grid-based logic/math puzzles (think “math cages” / grouped cells).  
-The goal is to fill an **N×N** grid with numbers while satisfying the puzzle’s grouping constraints.
+A desktop puzzle game prototype built with Python and PyQt6.
 
-> This project is actively being developed with a collaborator. Expect changes and improvements over time.
+MathBoxy is a grid-based logic/math puzzle inspired by games that use **grouped cells (cages)** with constraints.  
+The project is currently in active development and is being built collaboratively.
 
 ---
 
@@ -14,7 +14,7 @@ The goal is to fill an **N×N** grid with numbers while satisfying the puzzle’
 - [How it’s built](#how-its-built)
 - [Getting started](#getting-started)
   - [Prerequisites](#prerequisites)
-  - [Create and use a virtual environment (recommended)](#create-and-use-a-virtual-environment-recommended)
+  - [Virtual environment (recommended)](#virtual-environment-recommended)
   - [Install dependencies](#install-dependencies)
   - [Run the app](#run-the-app)
 - [Developer notes](#developer-notes)
@@ -24,48 +24,52 @@ The goal is to fill an **N×N** grid with numbers while satisfying the puzzle’
 ---
 
 ## What is the game?
-**Math Box** is a grid-based puzzle. Each puzzle contains:
-- An **N×N grid**
-- **Groups (cages)** that partition the grid into regions (the generator creates these)
-- (Planned) math constraints for each group such as a **target number** and **operation** (e.g., `12×`, `7+`, etc.)
+**MathBoxy** is an **N×N grid-based puzzle game**.
 
-The game will eventually show only the playable puzzle grid.  
-During development, we also support debug views like showing group outlines and solution numbers.
+Each puzzle consists of:
+- A square grid (e.g. 4×4, 6×6)
+- Groups (also called *cages*) that divide the grid into regions
+- (Planned) mathematical constraints per group, such as a target number and operation
+
+The player’s goal is to fill in the grid so that all constraints are satisfied.
 
 ---
 
 ## How to play
-> Rules are still evolving as the generator and UI are developed. The intended gameplay is:
+> The exact rules are still evolving as the generator and UI are developed.
 
-1. Fill the grid with numbers (typically `1..N`).
-2. (Planned) Each row/column must satisfy constraints (e.g., no duplicates) depending on the final rule set.
-3. Each **group/cage** must satisfy its math rule (target + operation).
-4. Solve until the entire grid is valid.
+Planned gameplay:
+1. Fill each cell with a number (typically `1..N`)
+2. (Planned) Rows and columns must follow validity rules (e.g., no duplicates)
+3. Each group/cage must satisfy its math rule
+4. The puzzle is solved when the entire grid is valid
 
 ---
 
 ## Project status
-✅ Basic PyQt6 grid window implemented  
-✅ Solution generation and grouping (prototype generator)  
-🚧 Group boundary rendering (in-progress)  
-🚧 Final puzzle rules, input UI, validation, and gameplay loop (planned)
+- ✅ PyQt6 grid UI implemented
+- ✅ Solution grid generation
+- ✅ Grouping (cage) generation (logic side)
+- 🚧 Visual cage boundaries (in progress)
+- 🚧 Gameplay input and validation (planned)
 
 ---
 
 ## How it’s built
-- **Language:** Python 3
-- **UI:** [PyQt6](https://pypi.org/project/PyQt6/)
-- **Core modules:**
-  - `main.py` – app entry point (creates generator and launches UI)
-  - `grid_window.py` – renders the grid in a `QTableWidget`
-  - `puzzle_generator.py` – generates solution grid and groupings (uses `random`)
 
-### Current imports (not exhaustive)
-- `PyQt6.QtWidgets` (`QApplication`, `QMainWindow`, `QTableWidget`, `QTableWidgetItem`)
-- `PyQt6.QtCore` (`Qt`)
-- `random`
-- `enum` (`Enum`, `auto`)
-- `__future__` annotations
+### Language
+- **Python 3**
+
+### Libraries
+- **PyQt6** – GUI framework
+- **random** – puzzle generation
+- **enum** – render/view modes
+- **__future__ annotations** – forward-compatible typing
+
+### Key files
+- `main.py` – Application entry point
+- `grid_window.py` – UI grid rendering and view modes
+- `puzzle_generator.py` – Puzzle and grouping generation logic
 
 ---
 
@@ -76,15 +80,20 @@ During development, we also support debug views like showing group outlines and 
   Check your version:
   ```powershell
   python --version
-(Optional but recommended) Git installed:
+(Optional but recommended) Git:
 
 powershell
 Copy code
 git --version
-Create and use a virtual environment (recommended)
+Virtual environment (recommended)
 Why use a virtual environment?
-A virtual environment isolates your project dependencies from your system Python.
-This prevents version conflicts and makes it easier for collaborators to match the same setup.
+A virtual environment:
+
+Keeps project dependencies isolated
+
+Prevents version conflicts
+
+Makes collaboration easier and reproducible
 
 Windows (PowerShell)
 From the project root folder:
@@ -98,7 +107,7 @@ If PowerShell blocks activation, run:
 powershell
 Copy code
 Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-Then try activating again:
+Then activate again:
 
 powershell
 Copy code
@@ -109,7 +118,6 @@ Copy code
 python3 -m venv .venv
 source .venv/bin/activate
 Install dependencies
-Install PyQt6
 With the virtual environment activated:
 
 powershell
@@ -117,12 +125,12 @@ Copy code
 python -m pip install --upgrade pip
 pip install PyQt6
 (Recommended) Freeze dependencies
-After installing everything you use, generate a requirements.txt so collaborators can install easily:
+After installing everything you use:
 
 powershell
 Copy code
 pip freeze > requirements.txt
-Then others can do:
+Other contributors can then install dependencies with:
 
 powershell
 Copy code
@@ -135,58 +143,68 @@ Copy code
 python main.py
 Developer notes
 View modes (debugging)
-The UI supports multiple render modes for development/testing:
+The UI supports multiple render modes for development:
 
-GAME – only the playable grid (final intended view)
+GAME – Only the playable grid (final intended view)
 
-GROUPS – group/cage visuals only (no numbers)
+GROUPS – Group/cage visuals only
 
-GROUPS_AND_NUMBERS – groups + solution numbers (debug)
+GROUPS_AND_NUMBERS – Groups + solution numbers (debug)
 
-These are defined in grid_window.py using an Enum ViewMode.
+These modes are defined in grid_window.py using an Enum called ViewMode.
 
 Contributing
 This is a collaborative project.
 
-Suggested workflow:
-
+Suggested workflow
 Create a new branch for each feature:
 
 powershell
 Copy code
-git checkout -b feature/<short-name>
-Commit often with clear messages.
+git checkout -b feature/your-feature-name
+Commit changes with clear messages
 
-Push your branch and open a Pull Request.
+Push your branch and open a Pull Request
 
 Code style
 Keep functions small and well-commented
 
 Prefer readable code over clever code
 
-Add simple tests or debug helpers where helpful
+Add simple debug helpers where helpful
 
 License
-TBD (choose a license when ready — e.g., MIT).
+TBD (choose a license when ready, e.g. MIT).
 
 yaml
 Copy code
 
 ---
 
-### Two quick upgrades I recommend adding right now
-1) **Add a `requirements.txt`** once you confirm the dependencies:
-- Activate venv
-- `pip install PyQt6`
-- `pip freeze > requirements.txt`
+## ✅ How to add it via the GitHub browser (no terminal)
 
-2) Add a `.gitignore` (Python + venv) if you haven’t already:
-```gitignore
-__pycache__/
-*.pyc
-.venv/
-venv/
-.env
-.DS_Store
-.idea/
-.vscode/
+1. Go to:  
+   👉 https://github.com/AbdiVicenciodelmoral/mathboxy
+2. Click **Add a README** (or edit the existing one)
+3. **Paste everything above**
+4. Click **Commit changes**
+
+GitHub will render it perfectly.
+
+---
+
+### Why this version works
+- ✔ Proper `#` headers
+- ✔ Proper fenced code blocks (```powershell / ```bash)
+- ✔ No stray “Copy code” text
+- ✔ GitHub-friendly Markdown
+
+If you want, next we can:
+- Add screenshots to the README
+- Add a roadmap section
+- Add badges (Python version, status)
+- Add a CONTRIBUTING.md for your friend
+
+
+
+
